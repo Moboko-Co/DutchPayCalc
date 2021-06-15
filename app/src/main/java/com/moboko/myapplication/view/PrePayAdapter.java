@@ -1,24 +1,20 @@
 package com.moboko.myapplication.view;
 
-import android.app.Activity;
 import android.content.Context;
-import android.media.Image;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
-
-import androidx.fragment.app.FragmentManager;
 
 import com.moboko.myapplication.R;
 import com.moboko.myapplication.entity.ItemList;
@@ -36,9 +32,6 @@ public class PrePayAdapter extends BaseAdapter {
     private int layout = 0;
     private ArrayList<ItemList> itemLists;
     private LayoutInflater inflater = null;
-    Spinner prepaySp;
-    EditText detailInputEditText;
-    ImageButton detailDeleteBt;
 
     public PrePayAdapter(Context c, int l, ArrayList<ItemList> itemLists) {
         this.mContext = c;
@@ -65,75 +58,59 @@ public class PrePayAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final PrePayAdapter.ViewHolder holder;
+
         if (convertView == null) {
             convertView = inflater.inflate(this.layout, parent, false);
+            holder = new PrePayAdapter.ViewHolder(convertView.findViewById(R.id.prepay_sp)
+                    , convertView.findViewById(R.id.detail_input_et)
+                    , convertView.findViewById(R.id.detail_delete_bt));
+            convertView.setTag(holder);
+        } else holder = (PrePayAdapter.ViewHolder)convertView.getTag();
 
-            ArrayList<String> spinnerItems = new ArrayList<String>();
-            spinnerItems.add(PEOPLE_0);
-            spinnerItems.add(PEOPLE_1);
-            spinnerItems.add(PEOPLE_2);
-            spinnerItems.add(PEOPLE_3);
-            spinnerItems.add(PEOPLE_4);
+        ArrayList<String> spinnerItems = new ArrayList<String>();
+        spinnerItems.add(PEOPLE_0);
+        spinnerItems.add(PEOPLE_1);
+        spinnerItems.add(PEOPLE_2);
+        spinnerItems.add(PEOPLE_3);
+        spinnerItems.add(PEOPLE_4);
 
-            // ArrayAdapter
-            ArrayAdapter<String> spinnerAdapter
-                    = new ArrayAdapter<String>(convertView.getContext(), android.R.layout.simple_spinner_item, spinnerItems);
+        // ArrayAdapter
+        ArrayAdapter<String> spinnerAdapter
+                = new ArrayAdapter<String>(convertView.getContext(), android.R.layout.simple_spinner_item, spinnerItems);
 
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // spinner に adapter をセット
-            prepaySp = convertView.findViewById(R.id.prepay_sp);
-            prepaySp.setAdapter(spinnerAdapter);
-            int id = itemLists.get(position).getId();
-            prepaySp.setSelection(id);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            detailInputEditText = convertView.findViewById(R.id.detail_input_et);
+        holder.setListItem(spinnerAdapter,itemLists.get(position));
 
-            int price = itemLists.get(position).getPrice();
-            detailInputEditText.setText(String.valueOf(price));
-
-
-        }
-
-        detailDeleteBt = convertView.findViewById(R.id.detail_delete_bt);
-        detailDeleteBt.setOnClickListener(new View.OnClickListener() {
+        holder.detailDeleteBt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 itemLists.remove(position);
                 notifyDataSetChanged();
             }
-        });;
-
-        prepaySp = convertView.findViewById(R.id.prepay_sp);
-        prepaySp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        });
+        ;
+        holder.prepaySp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapter, View v,
-                                       int pos, long id)
-            {
-                ItemList item = new ItemList();
-                item.setId(pos);
-                item.setPrice(itemLists.get(position).getPrice());
-                itemLists.set(position,item);
+                                       int pos, long id) {
+                itemLists.get(position).setId(pos);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapter) {}
+            public void onNothingSelected(AdapterView<?> adapter) {
+            }
         });
 
-        detailInputEditText = convertView.findViewById(R.id.detail_input_et);
-        detailInputEditText.setOnKeyListener(new View.OnKeyListener() {
+        holder.detailInputEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
-                    ItemList item = new ItemList();
-                    item.setId(itemLists.get(position).getId());
-                    String priceEditText = String.valueOf(detailInputEditText.getText());
-                    item.setPrice(Integer.parseInt(priceEditText));
-                    itemLists.set(position,item);
-                    ((InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+                    ((InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
                 return false;
             }
         });
-
 
 //        detailInputEditText.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
@@ -144,4 +121,44 @@ public class PrePayAdapter extends BaseAdapter {
         return convertView;
     }
 
+    static class ViewHolder {
+        private final Spinner prepaySp;
+        private final EditText detailInputEditText;
+        private final ImageButton detailDeleteBt;
+        private ItemList item;
+
+
+        ViewHolder(Spinner prepaySp, EditText detailInputEditText, ImageButton detailDeleteBt) {
+            this.prepaySp = prepaySp;
+            this.detailInputEditText = detailInputEditText;
+            this.detailDeleteBt = detailDeleteBt;
+            detailInputEditText.addTextChangedListener(textWatcher);
+        }
+
+        private TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (item != null) {
+                    item.setPrice(Integer.parseInt(editable.toString()));
+                }
+            }
+        };
+
+        void setListItem(ArrayAdapter<String> spinnerAdapter,ItemList item) {
+            this.item = item;
+            // spinner に adapter をセット
+            prepaySp.setAdapter(spinnerAdapter);
+            int id = item.getId();
+            prepaySp.setSelection(id);
+            detailInputEditText.setText(String.valueOf(item.getPrice()));
+        }
+    }
 }

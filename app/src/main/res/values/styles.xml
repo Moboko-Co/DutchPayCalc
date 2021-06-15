@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="tv_main">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="bt_num_calc">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="backgroundTint">@color/theme_c4</item>
+    </style>
+
+    <style name="bt_char_calc">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/theme_c1</item>
+    </style>
+
+    <style name="tv_calc_bottom">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">3</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">30dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="bt_background_tint">
+        <item name="backgroundTint">@color/theme_c4</item>
+    </style>
+
+    <style name="tv_result">
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tv_calc_head">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tv_dig_result">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="iv_result">
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="iv_dig_result">
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:gravity">right|center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="tv_headline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="main_ll_head">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/tv_round</item>
+    </style>
+
+    <style name="main_ll_detail">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/tv_round</item>
+    </style>
+
+    <style name="result_ll_head">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/tv_round</item>
+    </style>
+
+    <style name="main_ll_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/tv_round</item>
+    </style>
+
+    <style name="result_ll_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_weight">2</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@drawable/ll_bottom_round</item>
+    </style>
+
+
+    <style name="category_radio">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+<!--        <item name="android:background">@drawable/rg_ct</item>-->
+    </style>
+
+    <style name="DutchPayCalc" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/theme_c2</item>
+        <item name="colorPrimaryVariant">@color/theme_c3</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/theme_a3</item>
+        <item name="colorSecondaryVariant">@color/theme_a4</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:colorBackground" tools:targetApi="l">@color/theme_c2</item>
+        <item name="colorOnBackground">@color/theme_c3</item>
+        <item name="colorSurface">@color/theme_c3</item>
+        <item name="colorOnSurface">@color/theme_c3</item>
+        <item name="colorError">@color/theme_c3</item>
+        <item name="colorOnError">@color/theme_c3</item>
+
+        <item name="statusBarBackground">@color/theme_c2</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/statusBarBackground</item>
+
+
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="CalcFragTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+                <item name="colorPrimary">#212121</item>
+                <item name="colorPrimaryVariant">#000000</item>
+                <item name="colorOnPrimary">#FFFFFF</item>
+                <item name="colorSecondary">#2962FF</item>
+                <item name="colorSecondaryVariant">#0039CB</item>
+                <item name="colorOnSecondary">#FFFFFF</item>
+                <item name="colorError">#F44336</item>
+                <item name="colorOnError">#FFFFFF</item>
+                <item name="colorSurface">#FFFFFF</item>
+                <item name="colorOnSurface">#212121</item>
+                <item name="android:colorBackground">#212121</item>
+                <item name="colorOnBackground">#212121</item>
+                <item name="android:statusBarColor" tools:targetApi="l">#212121</item>
+    </style>
+
+</resources>

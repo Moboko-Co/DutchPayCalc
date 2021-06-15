@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <!-- 選択時の設定 -->
+        <item android:state_checked="true">
+                <shape android:shape="rectangle">
+                        <!-- 背景色 -->
+                        <solid android:color="@color/theme_c4" />
+                        <corners
+                            android:topRightRadius="6dp"
+                            android:bottomRightRadius="6dp"
+                            android:bottomLeftRadius="6dp"
+                            android:topLeftRadius="6dp"
+                            />
+                </shape>
+        </item>
+        <!-- 非選択時の設定 -->
+        <item android:state_checked="false" android:drawable="@color/theme_c2_2" />
+</selector>

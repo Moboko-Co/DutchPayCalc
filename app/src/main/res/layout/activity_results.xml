@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResultsActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar_results"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="?attr/colorPrimary" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tool_bar_results"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/result_ll_head"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/tv_result"
+                        android:text="@string/all_people" />
+
+                    <TextView
+                        android:id="@+id/tv_all_people_detail"
+                        style="@style/tv_dig_result" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/result_ll_head"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/tv_result"
+                        android:text="@string/all_price" />
+
+                    <TextView
+                        android:id="@+id/tv_all_price_detail"
+                        style="@style/tv_dig_result" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/result_ll_head"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/tv_result"
+                        android:text="@string/ignore_people" />
+
+                    <TextView
+                        android:id="@+id/tv_ignore_people_detail"
+                        style="@style/tv_dig_result" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/result_ll_head"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/tv_result"
+                        android:text="@string/fraction_price" />
+
+                    <TextView
+                        android:id="@+id/tv_fra_people_detail"
+                        style="@style/tv_dig_result" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    style="@style/result_ll_head"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/tv_result"
+                        android:text="@string/collect_price" />
+
+                    <TextView
+                        android:id="@+id/tv_col_people_detail"
+                        style="@style/tv_dig_result" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/result_ll_head"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        style="@style/tv_result"
+                        android:text="@string/one_price" />
+
+                    <TextView
+                        android:id="@+id/tv_one_people_detail"
+                        style="@style/tv_dig_result" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/result_ll_bottom"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                style="@style/tv_headline"
+                android:text="@string/collect_title" />
+
+            <ListView
+                android:id="@+id/lv_collect_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/result_ll_bottom"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="4dp">
+
+            <TextView
+                style="@style/tv_headline"
+                android:text="@string/payment_title" />
+
+            <ListView
+                android:id="@+id/lv_pay_item"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="4dp"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

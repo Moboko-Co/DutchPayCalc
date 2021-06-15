@@ -20,14 +20,8 @@
         android:layout_below="@id/tool_bar_main"
         android:background="?attr/colorPrimary"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
             <LinearLayout
-                style="@style/main_ll_detail"
+                style="@style/main_ll_head"
                 android:layout_marginHorizontal="4dp"
                 android:layout_marginBottom="4dp">
 
@@ -35,32 +29,29 @@
                     style="@style/tv_main"
                     android:text="@string/all_people"></TextView>
 
-                <Button
-                    android:id="@+id/all_people_bt"
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:backgroundTint="@color/theme_c4"></Button>
+                    android:id="@+id/all_people_et"
+                    style="@style/main_et_digit"
+                    android:layout_marginHorizontal="10dp"></EditText>
             </LinearLayout>
             <LinearLayout
-                style="@style/main_ll_detail"
-                android:layout_marginRight="4dp"
+                style="@style/main_ll_head"
+                android:layout_marginHorizontal="4dp"
                 android:layout_marginBottom="4dp">
 
                 <TextView
                     style="@style/tv_main"
                     android:text="@string/ignore_people"></TextView>
 
-                <Button
-                    android:id="@+id/ignore_people_bt"
+                <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="10dp"
-                    android:backgroundTint="@color/theme_c4"></Button>
+                    android:id="@+id/ignore_people_et"
+                    style="@style/main_et_digit"
+                    android:layout_marginHorizontal="10dp"></EditText>
             </LinearLayout>
-
-        </LinearLayout>
-
 
         <LinearLayout
             style="@style/main_ll_head"

@@ -104,7 +104,7 @@
         <item name="android:background">@drawable/tv_round</item>
     </style>
 
-    <style name="main_ll_detail">
+    <style name="result_ll_head">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_height">match_parent</item>
@@ -112,12 +112,14 @@
         <item name="android:background">@drawable/tv_round</item>
     </style>
 
-    <style name="result_ll_head">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:background">@drawable/tv_round</item>
+    <style name="main_et_digit">
+        <item name="android:digits">"0123456789"</item>
+        <item name="android:background">@color/theme_c4</item>
+        <item name="android:textSize">15dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:inputType">number</item>
+        <item name="android:maxLength">7</item>
+        <item name="android:selectAllOnFocus">true</item>
     </style>
 
     <style name="main_ll_bottom">

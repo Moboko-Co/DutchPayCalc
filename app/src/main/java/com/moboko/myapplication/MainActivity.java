@@ -9,16 +9,20 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -38,7 +42,8 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
     private FragmentManager fragmentManager;
     public static ListView listView;
     public static PrePayAdapter adapter;
-    Button allPeopleButton, plusButton, ignorePeopleButton;
+    Button plusButton;
+    EditText allPeopleEditText, ignorePeopleEditText;
     RadioGroup rgFraction;
     //RadioGroup rgCollDiv;
     ArrayList<ItemList> itemLists = new ArrayList<>();
@@ -58,8 +63,8 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
                 //入力された値の取得
 
                 // 総人数
-                int allPeople = Integer.parseInt(String.valueOf(allPeopleButton.getText()));
-                int ignorePeople = Integer.parseInt(String.valueOf(ignorePeopleButton.getText()));
+                int allPeople = Integer.parseInt(String.valueOf(allPeopleEditText.getText()));
+                int ignorePeople = Integer.parseInt(String.valueOf(ignorePeopleEditText.getText()));
 
                 // 総人数 値チェック
                 if (allPeople == 0) {
@@ -156,13 +161,13 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
 
         plusButton = findViewById(R.id.detail_plus_bt);
 
-        allPeopleButton = findViewById(R.id.all_people_bt);
-        allPeopleButton.setOnClickListener(buttonClick);
-        allPeopleButton.setText("0");
+        allPeopleEditText = findViewById(R.id.all_people_et);
+        allPeopleEditText.setOnKeyListener(enterClick);
+        allPeopleEditText.setText("0");
 
-        ignorePeopleButton = findViewById(R.id.ignore_people_bt);
-        ignorePeopleButton.setOnClickListener(buttonClick);
-        ignorePeopleButton.setText("0");
+        ignorePeopleEditText = findViewById(R.id.ignore_people_et);
+        ignorePeopleEditText.setOnKeyListener(enterClick);
+        ignorePeopleEditText.setText("0");
 
         listView = findViewById(R.id.item_lv);
         //rgCollDiv = findViewById(R.id.rg_col_div);
@@ -192,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (view.getId() == R.id.detail_input_bt) {
+                if (view.getId() == R.id.detail_input_et) {
                     Bundle bundle = new Bundle();
                     bundle.putInt(FRAGMENT_MODE, DETAIL_PRICE);
                     bundle.putInt(DETAIL_MODE, i);
@@ -203,42 +208,53 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
         });
     }
 
-    private View.OnClickListener buttonClick = new View.OnClickListener() {
+    private View.OnKeyListener enterClick = new View.OnKeyListener(){
+
         @Override
-        public void onClick(View view) {
-            Bundle bundle = new Bundle();
-
-            switch (view.getId()) {
-//                case R.id.all_price_bt:
-//                    bundle.putInt(FRAGMENT_MODE, ALL_PRICE);
-//                    bundle.putInt(DETAIL_MODE, 0);
-//                    break;
-                case R.id.all_people_bt:
-                    //　表示するフラグメントクラスのインスタンス
-                    bundle.putInt(FRAGMENT_MODE, ALL_PEOPLE);
-                    bundle.putInt(DETAIL_MODE, 0);
-                    break;
-                case R.id.ignore_people_bt:
-                    //　表示するフラグメントクラスのインスタンス
-                    bundle.putInt(FRAGMENT_MODE, IGNORE_PEOPLE);
-                    bundle.putInt(DETAIL_MODE, 0);
-                    break;
+        public boolean onKey(View v, int keyCode, KeyEvent event) {
+            if(event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
-
-            callFragment(bundle);
+            return false;
         }
     };
+
+//    private View.OnClickListener buttonClick = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Bundle bundle = new Bundle();
+//
+//            switch (view.getId()) {
+////                case R.id.all_price_bt:
+////                    bundle.putInt(FRAGMENT_MODE, ALL_PRICE);
+////                    bundle.putInt(DETAIL_MODE, 0);
+////                    break;
+//                case R.id.all_people_et:
+//                    //　表示するフラグメントクラスのインスタンス
+//                    bundle.putInt(FRAGMENT_MODE, ALL_PEOPLE);
+//                    bundle.putInt(DETAIL_MODE, 0);
+//                    break;
+//                case R.id.ignore_people_et:
+//                    //　表示するフラグメントクラスのインスタンス
+//                    bundle.putInt(FRAGMENT_MODE, IGNORE_PEOPLE);
+//                    bundle.putInt(DETAIL_MODE, 0);
+//                    break;
+//            }
+//
+//            callFragment(bundle);
+//        }
+//    };
 
     @Override
     public void onClickButton(String value, int mode, int pos) {
         switch (mode) {
             case ALL_PEOPLE:
-                Button allPeopleButton = findViewById(R.id.all_people_bt);
-                allPeopleButton.setText(value);
+                EditText allPeopleEditText = findViewById(R.id.all_people_et);
+                allPeopleEditText.setText(value);
                 break;
             case IGNORE_PEOPLE:
-                Button ignorePeopleButton = findViewById(R.id.ignore_people_bt);
-                ignorePeopleButton.setText(value);
+                EditText ignorePeopleEditText = findViewById(R.id.ignore_people_et);
+                ignorePeopleEditText.setText(value);
                 break;
 //            case ALL_PRICE:
 //                Button allPriceButton = findViewById(R.id.all_price_bt);

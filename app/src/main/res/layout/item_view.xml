@@ -12,12 +12,13 @@
         android:backgroundTint="@color/black"
         android:id="@+id/prepay_sp">
     </Spinner>
-    <Button
+    <EditText
         android:layout_width="0dp"
         android:layout_weight="3"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/theme_c4"
-        android:id="@+id/detail_input_bt"/>
+        android:layout_height="match_parent"
+        style="@style/main_et_digit"
+        android:layout_margin="4dp"
+        android:id="@+id/detail_input_et"/>
     <ImageButton
         android:layout_width="0dp"
         android:layout_weight="1"

@@ -9,12 +9,16 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         style="@style/iv_result"
+        android:background="@drawable/rt_round"
+        android:layout_margin="4dp"
         android:id="@+id/tv_from_pay_people">
     </TextView>
     <TextView
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
+        android:background="@drawable/rt_round"
+        android:layout_margin="4dp"
         style="@style/iv_result"
         android:id="@+id/tv_to_pay_people">
     </TextView>
@@ -22,6 +26,8 @@
         android:layout_width="0dp"
         android:layout_weight="2"
         android:layout_height="match_parent"
+        android:background="@drawable/rt_round"
+        android:layout_margin="4dp"
         style="@style/iv_dig_result"
         android:id="@+id/tv_pay_price"/>
 </LinearLayout>

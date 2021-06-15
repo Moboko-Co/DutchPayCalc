@@ -20,7 +20,7 @@
     <string name="startCalc">計算</string>
     <string name="all_price">総額</string>
     <string name="all_people">総人数</string>
-    <string name="all_detail">立替</string>
+    <string name="all_detail">立替（立替者／金額）</string>
     <string name="one_price">一人</string>
     <string name="fraction_price">端数</string>
     <string name="pay_people">支払う人</string>

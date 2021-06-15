@@ -20,8 +20,14 @@
         android:layout_below="@id/tool_bar_main"
         android:background="?attr/colorPrimary"
         android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/main_ll_head"
+            android:layout_marginHorizontal="4dp"
+            android:layout_marginBottom="4dp">
+
             <LinearLayout
-                style="@style/main_ll_head"
+                style="@style/main_ll_detail"
                 android:layout_marginHorizontal="4dp"
                 android:layout_marginBottom="4dp">
 
@@ -30,14 +36,16 @@
                     android:text="@string/all_people"></TextView>
 
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:id="@+id/all_people_et"
                     style="@style/main_et_digit"
-                    android:layout_marginHorizontal="10dp"></EditText>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginTop="4dp"></EditText>
             </LinearLayout>
+
             <LinearLayout
-                style="@style/main_ll_head"
+                style="@style/main_ll_detail"
                 android:layout_marginHorizontal="4dp"
                 android:layout_marginBottom="4dp">
 
@@ -46,12 +54,14 @@
                     android:text="@string/ignore_people"></TextView>
 
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:id="@+id/ignore_people_et"
                     style="@style/main_et_digit"
-                    android:layout_marginHorizontal="10dp"></EditText>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="4dp"
+                    android:layout_marginTop="4dp"></EditText>
             </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             style="@style/main_ll_head"

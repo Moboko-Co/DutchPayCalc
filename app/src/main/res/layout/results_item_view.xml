@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@drawable/it_round">
+    android:background="@drawable/it_round"
+    android:orientation="horizontal">
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
+        android:id="@+id/tv_collect_people"
         style="@style/iv_result"
-        android:id="@+id/tv_collect_people">
-    </TextView>
+        android:layout_margin="4dp"
+        android:background="@drawable/rt_round"></TextView>
+
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="2"
-        android:layout_height="match_parent"
+        android:id="@+id/tv_collect_price"
         style="@style/iv_dig_result"
-        android:id="@+id/tv_collect_price"/>
+        android:layout_margin="4dp"
+        android:background="@drawable/rt_round" />
 </LinearLayout>

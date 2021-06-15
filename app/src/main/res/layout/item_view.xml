@@ -7,9 +7,10 @@
     <Spinner
         android:layout_width="0dp"
         android:layout_weight="2"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:spinnerMode="dialog"
-        android:backgroundTint="@color/black"
+        style="@style/mySpinnerStyle"
+        android:layout_margin="4dp"
         android:id="@+id/prepay_sp">
     </Spinner>
     <EditText

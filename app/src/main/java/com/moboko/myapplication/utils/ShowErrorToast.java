@@ -12,6 +12,9 @@ public class ShowErrorToast {
             case VALUE_ZERO:
                 errorMessage = errorParts + "に0は設定できません";
                 break;
+            case DETAIL_ZERO:
+                errorMessage = errorParts + "は1件以上設定してください";
+                break;
             case DETAIL_MAX:
                 errorMessage = ERROR_MAX_DETAIL;
                 break;

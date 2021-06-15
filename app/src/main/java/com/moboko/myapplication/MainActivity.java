@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.moboko.myapplication.entity.ItemList;
 import com.moboko.myapplication.entity.ResultsItemList;
 import com.moboko.myapplication.utils.CommonConsts;
@@ -63,12 +64,25 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
                 //入力された値の取得
 
                 // 総人数
-                int allPeople = Integer.parseInt(String.valueOf(allPeopleEditText.getText()));
-                int ignorePeople = Integer.parseInt(String.valueOf(ignorePeopleEditText.getText()));
+                String allPeopleSt = String.valueOf(allPeopleEditText.getText());
+                String ignorePeopleSt = String.valueOf(ignorePeopleEditText.getText());
+
+                if(allPeopleSt.isEmpty()) allPeopleSt = "0";
+                if(ignorePeopleSt.isEmpty()) ignorePeopleSt = "0";
+                int allPeople = Integer.parseInt(allPeopleSt);
+                int ignorePeople = Integer.parseInt(ignorePeopleSt);
+
+                // 明細
+                ArrayList<ResultsItemList> resultsItemLists = new ArrayList<>();
+                int itemListCnt = adapter.getCount();
 
                 // 総人数 値チェック
                 if (allPeople == 0) {
                     ShowErrorToast.printErrorToast(this, RESULTS_ALL_PEOPLE, VALUE_ZERO);
+                    return true;
+                }
+                if(itemListCnt == 0){
+                    ShowErrorToast.printErrorToast(this, RESULTS_DETAIL, DETAIL_ZERO);
                     return true;
                 }
 
@@ -105,10 +119,6 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
                         break;
                 }
 
-                // 明細
-                ArrayList<ResultsItemList> resultsItemLists = new ArrayList<>();
-                int itemListCnt = adapter.getCount();
-
                 // 明細取得
                 for (int i = 0; i < itemListCnt; i++) {
                     ItemList itemList = (ItemList) adapter.getItem(i);
@@ -129,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
                 intent.putExtra(RESULTS_DETAIL, resultsItemLists);
                 intent.putExtra(RESULTS_IGNORE_PEOPLE, ignorePeople);
 
-                new AlertDialog.Builder(MainActivity.this)
+                new MaterialAlertDialogBuilder(MainActivity.this)
                         .setTitle(ALERT_TITLE_RESULTS)
                         .setMessage(ALERT_MESSAGE_RESULTS)
                         .setPositiveButton(ALERT_YES, new DialogInterface.OnClickListener() {

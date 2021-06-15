@@ -66,7 +66,7 @@ public class PrePayAdapter extends BaseAdapter {
                     , convertView.findViewById(R.id.detail_input_et)
                     , convertView.findViewById(R.id.detail_delete_bt));
             convertView.setTag(holder);
-        } else holder = (PrePayAdapter.ViewHolder)convertView.getTag();
+        } else holder = (PrePayAdapter.ViewHolder) convertView.getTag();
 
         ArrayList<String> spinnerItems = new ArrayList<String>();
         spinnerItems.add(PEOPLE_0);
@@ -77,11 +77,11 @@ public class PrePayAdapter extends BaseAdapter {
 
         // ArrayAdapter
         ArrayAdapter<String> spinnerAdapter
-                = new ArrayAdapter<String>(convertView.getContext(), android.R.layout.simple_spinner_item, spinnerItems);
+                = new ArrayAdapter<String>(convertView.getContext(), R.layout.custom_spinner, spinnerItems);
 
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(R.layout.custom_spinner_dropdown);
 
-        holder.setListItem(spinnerAdapter,itemLists.get(position));
+        holder.setListItem(spinnerAdapter, itemLists.get(position));
 
         holder.detailDeleteBt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -138,6 +138,7 @@ public class PrePayAdapter extends BaseAdapter {
         private TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
@@ -147,12 +148,14 @@ public class PrePayAdapter extends BaseAdapter {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (item != null) {
-                    item.setPrice(Integer.parseInt(editable.toString()));
+                    if (editable.toString().isEmpty()) {
+                        item.setPrice(0);
+                    } else item.setPrice(Integer.parseInt(editable.toString()));
                 }
             }
         };
 
-        void setListItem(ArrayAdapter<String> spinnerAdapter,ItemList item) {
+        void setListItem(ArrayAdapter<String> spinnerAdapter, ItemList item) {
             this.item = item;
             // spinner に adapter をセット
             prepaySp.setAdapter(spinnerAdapter);

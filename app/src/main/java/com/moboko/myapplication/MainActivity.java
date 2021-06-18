@@ -2,7 +2,6 @@ package com.moboko.myapplication;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -27,6 +26,7 @@ import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.moboko.myapplication.entity.ItemList;
 import com.moboko.myapplication.entity.ResultsItemList;
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements CalcFragment.Calc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.tool_bar_main);
+        MaterialToolbar toolbar = findViewById(R.id.tool_bar_main);
         setSupportActionBar(toolbar);
 
         plusButton = findViewById(R.id.detail_plus_bt);

@@ -98,7 +98,8 @@ public class ResultsAdapter extends BaseAdapter {
         } else if (price < 0) {
             price = price * (-1);
         }
-        tvResultPrice.setText(String.valueOf(price) + PRICE_YEN);
+        String priceText = String.format("%,d" + PRICE_YEN, price);
+        tvResultPrice.setText(priceText);
 
         return convertView;
     }

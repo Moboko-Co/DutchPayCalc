@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.moboko.myapplication.entity.PaymentItemList;
 import com.moboko.myapplication.entity.ResultsItemList;
 import com.moboko.myapplication.utils.PayComparator;
@@ -44,13 +44,13 @@ public class ResultsActivity extends AppCompatActivity {
     public static ListView payListView;
     public static PaymentAdapter payAdapter;
 
-    // toolbarにボタン配置
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.results_menu, menu);
-        return true;
-    }
+//    // toolbarにボタン配置
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.results_menu, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -69,7 +69,7 @@ public class ResultsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
 
-        Toolbar toolbar = findViewById(R.id.tool_bar_results);
+        MaterialToolbar toolbar = findViewById(R.id.tool_bar_results);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -157,29 +157,29 @@ public class ResultsActivity extends AppCompatActivity {
         // 計算結果余り
         int calcResultsMod = 0;
 
-        if (bCalcAllPrice % allPeople != 0) {
-            switch (collDiv) {
-                case COLL_DIV_UP:
-                    double tempCeil = (double) bCalcAllPrice / allPeople;
-                    onePrice = (int) Math.ceil(tempCeil);
-                    fractionPrice = onePrice % fractionDiv;
+        switch (collDiv) {
+            case COLL_DIV_UP:
+                double tempCeil = (double) bCalcAllPrice / allPeople;
+                onePrice = (int) Math.ceil(tempCeil);
+                fractionPrice = onePrice % fractionDiv;
+                if (fractionPrice != 0) {
                     onePrice += (fractionDiv - fractionPrice);
-                    calcResultsMod = (onePrice * allPeople) - bCalcAllPrice;
-                    break;
-                case COLL_DIV_DOWN:
-                    double tempFloor = (double) bCalcAllPrice / allPeople;
-                    onePrice = (int) Math.floor(tempFloor);
-                    fractionPrice = onePrice % fractionDiv;
+                }
+                calcResultsMod = (onePrice * allPeople) - bCalcAllPrice;
+                break;
+            case COLL_DIV_DOWN:
+                double tempFloor = (double) bCalcAllPrice / allPeople;
+                onePrice = (int) Math.floor(tempFloor);
+                fractionPrice = onePrice % fractionDiv;
+                if (fractionPrice != 0) {
                     onePrice -= fractionPrice;
-                    calcResultsMod = bCalcAllPrice - (onePrice * allPeople);
+                }
+                calcResultsMod = bCalcAllPrice - (onePrice * allPeople);
 
-                    break;
-            }
-            allPrice = onePrice * allPeople;
-        } else {
-            onePrice = bCalcAllPrice / allPeople;
-            allPrice = bCalcAllPrice;
+                break;
         }
+        allPrice = onePrice * allPeople;
+
         // 集金額作成
         for (Map.Entry<Integer, Integer> collectMap : insteadPayMap.entrySet()) {
             if (collectMap.getValue() - onePrice > 0) {
@@ -212,10 +212,12 @@ public class ResultsActivity extends AppCompatActivity {
                     // 支払い済みのため、削除
                     collectPrice -= payPrice;
                     calcPrice = payPrice;
+                    notEnoughPayMap.remove(payId);
                 } else if (collectPrice - payPrice == 0) {
                     // 支払い済みのため、削除
                     collectPrice = 0;
                     calcPrice = payPrice;
+                    notEnoughPayMap.remove(payId);
                 } else if (collectPrice - payPrice < 0) {
                     notEnoughPayMap.replace(payId, payPrice - collectPrice);
                     collectPrice = 0;
@@ -282,12 +284,19 @@ public class ResultsActivity extends AppCompatActivity {
             }
         }
 
-        tvAllPeopleDetail.setText(String.valueOf(bAllPeople) + PRICE_NIN);
-        tvAllPriceDetail.setText(String.valueOf(bCalcAllPrice) + PRICE_YEN);
-        tvFraPeopleDetail.setText(String.valueOf(calcResultsMod) + PRICE_YEN);
-        tvColPeopleDetail.setText(String.valueOf(allPeople * onePrice) + PRICE_YEN);
-        tvOnePeopleDetail.setText(String.valueOf(onePrice) + PRICE_YEN);
-        tvIgnorePeopleDetail.setText(String.valueOf(ignorePeople) + PRICE_NIN);
+        String outBAllPeople = String.format("%,d" + PRICE_NIN, bAllPeople);
+        String outBCalcAllPrice = String.format("%,d" + PRICE_YEN, bCalcAllPrice);
+        String outCalcResultsMod = String.format("%,d" + PRICE_YEN, calcResultsMod);
+        String outAPrice = String.format("%,d" + PRICE_YEN, allPeople * onePrice);
+        String outOnePrice = String.format("%,d" + PRICE_YEN, onePrice);
+        String outIgnorePeople = String.format("%,d" + PRICE_NIN, ignorePeople);
+
+        tvAllPeopleDetail.setText(outBAllPeople);
+        tvAllPriceDetail.setText(outBCalcAllPrice);
+        tvFraPeopleDetail.setText(outCalcResultsMod);
+        tvColPeopleDetail.setText(outAPrice);
+        tvOnePeopleDetail.setText(outOnePrice);
+        tvIgnorePeopleDetail.setText(outIgnorePeople);
 
         collectAdapter = new
                 ResultsAdapter(

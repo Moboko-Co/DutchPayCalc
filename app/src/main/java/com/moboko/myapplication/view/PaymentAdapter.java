@@ -133,7 +133,7 @@ public class PaymentAdapter extends BaseAdapter {
         if (price < 0) {
             price = price * (-1);
         }
-        String priceText = Integer.toString(price) + PRICE_YEN;
+        String priceText = String.format("%,d" + PRICE_YEN, price);
         tvPayPrice.setText(priceText);
 
         return convertView;
